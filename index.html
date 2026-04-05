@@ -1,0 +1,186 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Plant Disease Detection</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            background: #f1f1f1; 
+            padding: 40px; 
+        }
+        .box { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 10px; 
+            display: inline-block; 
+            box-shadow: 0 0 10px gray; 
+        }
+        input[type=file] { 
+            margin: 10px; 
+        }
+        input[type=submit] { 
+            background: green; 
+            color: white; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        input[type=submit]:hover {
+            background: darkgreen;
+        }
+        h2 { 
+            color: darkgreen; 
+        }
+        #preview {
+            margin-top: 15px;
+            max-width: 250px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>🌿 Plant Disease Detection</h1>
+        <form id="predictForm" action="/predict" method="post" enctype="multipart/form-data">
+            <input type="file" id="fileInput" name="file" accept="image/*" required>
+            <br>
+            <img id="preview" src="#" alt="Preview">
+            <br>
+            <input type="submit" value="Detect Disease">
+        </form>
+
+        {% if prediction %}
+            <h2>Disease: {{ prediction }}</h2>
+        {% endif %}
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const preview = document.getElementById('preview');
+        const form = document.getElementById('predictForm');
+
+        // ✅ Show the chosen image immediately
+        fileInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = 'block';
+            } else {
+                preview.style.display = 'none';
+            }
+        });
+
+        // ✅ Hide the preview once "Detect Disease" is clicked
+        form.addEventListener('submit', function() {
+            preview.style.display = 'none';
+        });
+    </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plant Disease Detection</title>
+    <style>
+       body { 
+    font-family: Arial, sans-serif;
+    background-image: url("{{ url_for('static', filename='uploads/bg.jpg') }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: flex-start;   /* move box to left */
+    align-items: center;
+    height: 100vh;
+    padding-left: 200px;           /* control left spacing */
+}
+
+        .box { 
+    background: rgba(255,255,255,0.9); 
+    padding: 30px; 
+    border-radius: 15px; 
+    display: inline-block; 
+    box-shadow: 0 0 15px gray;
+
+    margin-left: -100px;   /* moves box to left */
+}
+
+        input[type=file] { 
+            margin: 10px; 
+        }
+
+        input[type=submit] { 
+            background: green; 
+            color: white; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+
+        input[type=submit]:hover {
+            background: darkgreen;
+        }
+
+        h2 { 
+            color: darkgreen; 
+        }
+
+        #preview {
+            margin-top: 15px;
+            max-width: 250px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>🌿 Plant Disease Detection</h1>
+
+    <form id="predictForm" action="/predict" method="post" enctype="multipart/form-data">
+        <input type="file" id="fileInput" name="file" accept="image/*" required>
+        <br>
+
+        <img id="preview" src="#" alt="Preview">
+        <br>
+
+        <input type="submit" value="Detect Disease">
+    </form>
+
+    {% if prediction %}
+        <h2>Disease: {{ prediction }}</h2>
+    {% endif %}
+</div>
+
+<script>
+const fileInput = document.getElementById('fileInput');
+const preview = document.getElementById('preview');
+const form = document.getElementById('predictForm');
+
+fileInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = 'block';
+    } else {
+        preview.style.display = 'none';
+    }
+});
+
+form.addEventListener('submit', function() {
+    preview.style.display = 'none';
+});
+</script>
+
+</body>
+</html>
+
